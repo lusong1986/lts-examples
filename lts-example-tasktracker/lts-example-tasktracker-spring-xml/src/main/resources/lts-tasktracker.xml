@@ -17,14 +17,9 @@
     <bean id="taskTracker" class="com.github.ltsopensource.spring.TaskTrackerAnnotationFactoryBean" init-method="start">
         <property name="jobRunnerClass" value="com.github.ltsopensource.example.spring.SpringAnnotationJobRunner"/>
         <property name="clusterName" value="test_cluster"/>
-        <property name="registryAddress" value="zookeeper://127.0.0.1:2181"/>
-        <property name="nodeGroup" value="test_trade_TaskTracker"/>
+        <property name="registryAddress" value="zookeeper://192.168.56.101:2181"/>
+        <property name="nodeGroup" value="hello_TaskTracker"/>
         <property name="workThreads" value="64"/>
-        <property name="configs">
-            <props>
-                <prop key="job.fail.store">mapdb</prop>
-            </props>
-        </property>
     </bean>
 
     <!-- 方式2 -->

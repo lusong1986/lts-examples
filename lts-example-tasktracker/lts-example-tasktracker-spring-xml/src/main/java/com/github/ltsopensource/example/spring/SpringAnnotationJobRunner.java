@@ -27,10 +27,8 @@ public class SpringAnnotationJobRunner implements JobRunner {
 
             springBean.hello();
 
-            // TODO 业务逻辑
             LOGGER.info("我要执行：" + jobContext);
             BizLogger bizLogger = LtsLoggerFactory.getBizLogger();
-            // 会发送到 LTS (JobTracker上)
             bizLogger.info("测试，业务日志啊啊啊啊啊");
 
         } catch (Exception e) {
