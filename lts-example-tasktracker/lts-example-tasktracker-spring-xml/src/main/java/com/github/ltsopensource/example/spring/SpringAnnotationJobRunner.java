@@ -23,14 +23,16 @@ public class SpringAnnotationJobRunner implements JobRunner {
     @Override
     public Result run(JobContext jobContext) throws Throwable {
         try {
+            LOGGER.info(">>>>>>>>>>>>>>>>>>>>>我要执行：" + jobContext);
             Thread.sleep(1000L);
 
             springBean.hello();
 
-            LOGGER.info("我要执行：" + jobContext);
-            BizLogger bizLogger = LtsLoggerFactory.getBizLogger();
-            bizLogger.info("测试，业务日志啊啊啊啊啊");
 
+            BizLogger bizLogger = LtsLoggerFactory.getBizLogger();
+            bizLogger.info(">>>>>>>>>>>>>>>>>>测试，业务日志啊啊啊啊啊");
+
+            LOGGER.info(">>>>>>>>>>>>>>>>>>>>>执行完了：" + jobContext);
         } catch (Exception e) {
             LOGGER.info("Run job failed!", e);
             return new Result(Action.EXECUTE_LATER, e.getMessage());
