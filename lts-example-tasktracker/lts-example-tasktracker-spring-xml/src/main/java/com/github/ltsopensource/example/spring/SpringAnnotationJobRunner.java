@@ -1,5 +1,7 @@
 package com.github.ltsopensource.example.spring;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.ltsopensource.core.domain.Action;
@@ -24,15 +26,22 @@ public class SpringAnnotationJobRunner implements InterruptibleJobRunner {
 	public Result run(JobContext jobContext) throws Throwable {
 		try {
 			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>我要执行：" + jobContext.getJob().getTaskId());
-			// Thread.sleep(100L);
+			if (jobContext.getJob().getTaskId().endsWith("cron_one")) {
+				Thread.sleep(20000L);
+			}
 			
 			
 			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>getExtParams:" +  jobContext.getJob().getExtParams());
 
-			if (jobContext.getJob().getTaskId().endsWith("hello_5")) {
+			if (jobContext.getJob().getTaskId().endsWith("cron_father")) {
+				
+				if(new Random().nextBoolean()){
+				throw new RuntimeException("failed");
+				}
 				//Thread.sleep(2000L);
 				// System.in.read();
 			}
+			//Thread.sleep(Math.abs(new Random().nextInt(5) *1000));
 
 			// if (jobContext.getJob().getTaskId().endsWith("hello_5") ||
 			// jobContext.getJob().getTaskId().endsWith("hello_real")) {

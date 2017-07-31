@@ -11,20 +11,22 @@ import com.github.ltsopensource.tasktracker.runner.JobRunner;
 /**
  * @author Robert HG (254963746@qq.com) on 8/19/14.
  */
-public class TestJobRunner implements JobRunner {
+public class TestHelloJobRunner implements JobRunner {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestJobRunner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestHelloJobRunner.class);
 
     @Override
     public Result run(JobContext jobContext) throws Throwable {
         try {
+            LOGGER.info(">>>>>>>>>>>我要执行：" + jobContext.getJob().getTaskId());
             BizLogger bizLogger = jobContext.getBizLogger();
+            
+            Thread.sleep(2000);
 
-            // TODO 业务逻辑
-            LOGGER.info("我要执行：" + jobContext);
-            // 会发送到 LTS (JobTracker上)
-            bizLogger.info("测试，业务日志啊啊啊啊啊");
+            LOGGER.info("zai执行：" + jobContext.getJob().getTaskId());
+            bizLogger.info(">>>>>>>>>>>>>>>测试，业务日志啊啊啊啊啊");
 
+            bizLogger.info(">>>>>>>>>>>>>>>job完成");
         } catch (Exception e) {
             LOGGER.info("Run job failed!", e);
             return new Result(Action.EXECUTE_FAILED, e.getMessage());

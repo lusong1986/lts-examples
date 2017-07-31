@@ -39,6 +39,6 @@ public class TestJobRunnerTester extends JobRunnerTester {
 
     @Override
     protected JobRunner newJobRunner() {
-        return new TestJobRunner();
+        return new TestHelloJobRunner();
     }
 }
