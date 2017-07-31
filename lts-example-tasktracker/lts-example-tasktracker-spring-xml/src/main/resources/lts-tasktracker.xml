@@ -17,7 +17,7 @@
     <bean id="taskTracker" class="com.github.ltsopensource.spring.TaskTrackerAnnotationFactoryBean" init-method="start">
         <property name="jobRunnerClass" value="com.github.ltsopensource.example.spring.SpringAnnotationJobRunner"/>
         <property name="clusterName" value="new_cluster"/>
-        <property name="registryAddress" value="zookeeper://172.16.57.14:42181"/>
+        <property name="registryAddress" value="zookeeper://127.0.0.1:2181"/>
         <property name="nodeGroup" value="hello_TaskTracker"/>
         <property name="workThreads" value="64"/>
 		<property name="identity" value="mysql"/>      
