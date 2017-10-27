@@ -21,41 +21,28 @@ public class SpringAnnotationJobRunner implements InterruptibleJobRunner {
 
 	@Autowired
 	SpringBean springBean;
+	static int i = 0;
 
 	@Override
 	public Result run(JobContext jobContext) throws Throwable {
 		try {
-			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>我要执行：" + jobContext.getJob().getTaskId());
-			if (jobContext.getJob().getTaskId().endsWith("cron_one")) {
-				Thread.sleep(20000L);
-			}
-			
-			
-			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>getExtParams:" +  jobContext.getJob().getExtParams());
-
-			if (jobContext.getJob().getTaskId().endsWith("cron_father")) {
-				
-				if(new Random().nextBoolean()){
-				throw new RuntimeException("failed");
-				}
-				//Thread.sleep(2000L);
-				// System.in.read();
-			}
-			//Thread.sleep(Math.abs(new Random().nextInt(5) *1000));
-
-			// if (jobContext.getJob().getTaskId().endsWith("hello_5") ||
-			// jobContext.getJob().getTaskId().endsWith("hello_real")) {
-			// throw new RuntimeException("failed");
-			// }
-			//
-
-			springBean.hello();
+			LOGGER.info(">>>>>>>>>>>>>>>>>start " + jobContext.getJob().getTaskId());
 
 			BizLogger bizLogger = jobContext.getBizLogger();
-			bizLogger.info(">>>>>>>>>>>>>>>>>>测试，业务日志啊啊啊啊啊");
+			
+			for (int j = 0; j < 4; j++) {
+				bizLogger.info(">>>>>>>>>>>>>>>当前job执行进度:" + jobContext.getJob().getTaskId() + ">>>>>>>>>>>" + ++i);
+				Thread.sleep(1000 );
+				
+				if(2>1){
+					throw new RuntimeException("ssssssssssss");
+				}
+			}
+			
+			bizLogger.error(">>>>>>>>>>>>>>>>>>>>>>>>finish");
 
-			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>执行完了：" + jobContext.getJob().getTaskId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOGGER.info("Run job failed!", e);
 			return new Result(Action.EXECUTE_LATER, e.getMessage());
 		}

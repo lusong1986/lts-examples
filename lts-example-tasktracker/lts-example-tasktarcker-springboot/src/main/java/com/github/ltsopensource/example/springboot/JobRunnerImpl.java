@@ -14,22 +14,23 @@ import com.github.ltsopensource.tasktracker.runner.JobRunner;
  */
 @JobRunner4TaskTracker
 public class JobRunnerImpl implements JobRunner {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JobRunnerImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(JobRunnerImpl.class);
 
-    @Override
-    public Result run(JobContext jobContext) throws Throwable {
-        try {
-            BizLogger bizLogger = jobContext.getBizLogger();
+	@Override
+	public Result run(JobContext jobContext) throws Throwable {
+		try {
+			System.out.println(">>>>>>>>>>>>>>>>>>>" + jobContext.getJob());
+			BizLogger bizLogger = jobContext.getBizLogger();
 
-            // TODO 业务逻辑
-            LOGGER.info("我要执行：" + jobContext);
-            // 会发送到 LTS (JobTracker上)
-            bizLogger.info("测试，业务日志啊啊啊啊啊");
+			// TODO 业务逻辑
+			LOGGER.info("我要执行：" + jobContext);
+			// 会发送到 LTS (JobTracker上)
+			bizLogger.info("测试，业务日志啊啊啊啊啊");
 
-        } catch (Exception e) {
-            LOGGER.info("Run job failed!", e);
-            return new Result(Action.EXECUTE_FAILED, e.getMessage());
-        }
-        return new Result(Action.EXECUTE_SUCCESS, "执行成功了，哈哈");
-    }
+		} catch (Exception e) {
+			LOGGER.info("Run job failed!", e);
+			return new Result(Action.EXECUTE_FAILED, e.getMessage());
+		}
+		return new Result(Action.EXECUTE_SUCCESS, "执行成功了，哈哈");
+	}
 }
