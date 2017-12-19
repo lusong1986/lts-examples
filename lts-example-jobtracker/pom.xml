@@ -23,6 +23,10 @@
             <artifactId>lts</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.ltsopensource</groupId>
+            <artifactId>lts-jobtracker</artifactId>
+        </dependency>        
+        <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
