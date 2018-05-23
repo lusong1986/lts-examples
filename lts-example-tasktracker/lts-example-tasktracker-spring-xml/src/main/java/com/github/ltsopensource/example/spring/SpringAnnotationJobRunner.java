@@ -26,26 +26,37 @@ public class SpringAnnotationJobRunner implements InterruptibleJobRunner {
 	@Override
 	public Result run(JobContext jobContext) throws Throwable {
 		try {
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			LOGGER.info(">>>>>>>>>>>>>>>>>start " + jobContext.getJob().getTaskId());
 
 			BizLogger bizLogger = jobContext.getBizLogger();
-			
-			for (int j = 0; j < 4; j++) {
+
+			for (int j = 0; j < 1; j++) {
 				bizLogger.info(">>>>>>>>>>>>>>>当前job执行进度:" + jobContext.getJob().getTaskId() + ">>>>>>>>>>>" + ++i);
-				Thread.sleep(1000 );
-				
-				if(2>1){
+				Thread.sleep(3000 );
+
+				if (new Random().nextBoolean()) {
 					throw new RuntimeException("ssssssssssss");
 				}
 			}
-			
+
 			bizLogger.error(">>>>>>>>>>>>>>>>>>>>>>>>finish");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.info("Run job failed!", e);
 			return new Result(Action.EXECUTE_LATER, e.getMessage());
+		} finally {
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			LOGGER.info(">>>>>>>>>>>>>>>>>END " + jobContext.getJob().getTaskId());
 		}
+
 		return new Result(Action.EXECUTE_SUCCESS, "执行成功了，哈哈");
 	}
 
